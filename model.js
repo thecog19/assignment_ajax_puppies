@@ -2,27 +2,31 @@ var PUPPY = PUPPY || {};
 
 PUPPY.Model = (function($) {
 
-  var item = undefined;
+  var puppyList;
 
-  var storeItem = function(value){
-    item = value
-  }
+  var setPuppyList = function(value){
+    puppyList = value;
+  };
+
+  var getPuppyList = function() {
+    return puppyList
+  };
   
-  var getPuppyList = function(){
+  var requestPuppyList = function(){
     var list 
-    $.ajax({
+    return $.ajax({
       url: "https://ajax-puppies.herokuapp.com/puppies.json",
       type: "GET",
       dataType: "json",
       success: function(json){
-        storeItem(json)
+        setPuppyList(json);
       }
-    })
+    });
   };
 
   return {
-    getPuppyList: getPuppyList,
-    item: item
+    requestPuppyList,
+    getPuppyList
   }
 })($);
 

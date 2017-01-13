@@ -1,23 +1,20 @@
-//link to model
-//pass on request to view
-//view DOM mainpulates and renders. 
-
 var PUPPY = PUPPY || {};
 
 PUPPY.Controller = (function($, View, Model) {
 
   var init = function(){
-    View.populateList(Model.getPuppyList())
-  }
+    Model.requestPuppyList().then(function() {
+      View.populatePuppyList(Model.getPuppyList());
+    });
+  };
 
   return {
     init: init
   }
 
-  }
-)($, PUPPY.View, PUPPY.Model);
+})($, PUPPY.View, PUPPY.Model);
 
 
 $( document ).ready(function() {
-    PUPPY.Controller.init()
+    PUPPY.Controller.init();
 });
