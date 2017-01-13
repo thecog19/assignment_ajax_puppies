@@ -3,8 +3,21 @@
 //view DOM mainpulates and renders. 
 
 var PUPPY = PUPPY || {};
-console.log(PUPPY)
 
 PUPPY.Controller = (function($, View, Model) {
+
+  var init = function(){
+    View.populateList(Model.getPuppyList())
   }
-})($, PUPPY.View, PUPPY.Model);
+
+  return {
+    init: init
+  }
+
+  }
+)($, PUPPY.View, PUPPY.Model);
+
+
+$( document ).ready(function() {
+    PUPPY.Controller.init()
+});
